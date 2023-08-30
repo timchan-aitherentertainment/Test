@@ -44,7 +44,7 @@ jobs:
       # 5. Push new Wiki content
       - name: Push content to wiki
         run: |
-          rsync -av --delete documents/wiki tmp_wiki/ --exclude .git
+          rsync -av --delete documents/wiki/ tmp_wiki/ --exclude .git
           cd tmp_wiki
           git add .
           git commit -m "docs: update wiki" 
