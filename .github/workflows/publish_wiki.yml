@@ -33,7 +33,7 @@ jobs:
           
       - name: Push to wiki
         run: |
-            rsync -i -av --delete documents/wiki/ folder/ --exclude .git
+            rsync -I -av --delete documents/wiki/ folder/ --exclude .git
             cd folder
             git add .
             git commit -m "docs: update wiki" 
