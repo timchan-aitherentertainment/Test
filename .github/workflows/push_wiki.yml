@@ -27,9 +27,6 @@ jobs:
         run: |
           mkdir folder
           cd folder
-          git init
-          git config user.name $USER_NAME
-          git config user.email $USER_EMAIL
           git pull https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
           
       - name: Push to wiki
