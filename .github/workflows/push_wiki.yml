@@ -25,14 +25,18 @@ jobs:
 
       - name: Pull from wiki
         run: |
-          mkdir folder
-          cd folder
-          git pull https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
+            mkdir folder
+            cd folder
+            git pull https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Push to wiki
         run: |
-          rsync -av --delete documents/wiki/ folder/ --exclude .git
-          cd folder
-          git add .
-          git commit -m "docs: update wiki" 
-          git push -f -u https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git master
+            rsync -av --delete documents/wiki/ folder/ --exclude .git
+            cd folder
+            git add .
+            git commit -m "docs: update wiki" 
+            git push -f -u https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git master
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
