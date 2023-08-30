@@ -1,19 +1,18 @@
 name: Publish docs to Wiki
 
-# Trigger this action only if there are changes pushed to the docs/** directory under the main branch
 on:
   push:
     paths:
-      - documents/wiki/** # This includes all sub folders
+      - documents/wiki/**
     branches:
-      - main # This can be changed to any branch of your preference
+      - main
 
 env:
-  USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }} # This is the repository secret
-  USER_NAME: "Bot" # Enter the username of your (bot) account
-  USER_EMAIL: bot@gmail.com # Enter the e-mail of your (bot) account
-  OWNER: ${{ github.event.repository.owner.name }} # This is the repository owner
-  REPOSITORY_NAME: ${{ github.event.repository.name }} # This is the repository name
+  USER_TOKEN: ${{ secrets.WIKI_ACTION_TOKEN }}
+  USER_NAME: "timchan-aitherentertainment"
+  USER_EMAIL: tim.chan@aitherentertainment.com
+  OWNER: ${{ github.event.repository.owner.name }}
+  REPOSITORY_NAME: ${{ github.event.repository.name }}
 
 jobs:
   publish_docs_to_wiki:
@@ -28,6 +27,8 @@ jobs:
             mkdir folder
             cd folder
             git init
+            git config user.name $USER_NAME
+            git config user.email $USER_EMAIL
             git pull https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git
           
       - name: Push to wiki
