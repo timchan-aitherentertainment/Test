@@ -34,8 +34,8 @@ jobs:
       # 3. Pull old Wiki content
       - name: Pull content from wiki
         run: |
-          mkdir wiki
-          cd wiki
+          mkdir tmp_wiki
+          cd tmp_wiki
           git init
           git config user.name $USER_NAME
           git config user.email $USER_EMAIL
@@ -44,8 +44,8 @@ jobs:
       # 5. Push new Wiki content
       - name: Push content to wiki
         run: |
-          rsync -av --delete documents/wiki/ wiki/ --exclude .git
-          cd wiki
+          rsync -av --delete documents/wiki/ tmp_wiki/ --exclude .git
+          cd tmp_wiki
           git add .
-          git commit -m "docs: update wiki"
+          git commit -m "docs: update wiki" 
           git push -f -u https://$USER_TOKEN@github.com/$OWNER/$REPOSITORY_NAME.wiki.git master
